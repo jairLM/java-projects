@@ -1,0 +1,12 @@
+package org.myProyect;
+
+public class Opciones {
+	
+	void opcion1() {
+		
+		System.out.println("Has seleccionado la opcion 1 mensaje desde clase Opciones");
+		
+	}
+	
+
+}

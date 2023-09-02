@@ -3,10 +3,9 @@ package org.myProyect;
 import java.util.Scanner;
 
 public class CajeroAutomatico {
-
+	static Scanner sc = new Scanner(System.in);
 	public static void main(String[] args) {
-
-		Scanner sc = new Scanner(System.in);
+		
 
 		int opcion;
 		boolean salir = false;

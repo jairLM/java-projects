@@ -3,10 +3,10 @@ package org.myProyect;
 import java.util.Scanner;
 
 public class Opciones {
-
+	static Scanner sc = new Scanner(System.in);
 	static void opcion1() {
 
-		Scanner sc = new Scanner(System.in);
+		
 		double saldo = 6_000;
 		int opcion;
 		boolean salir = false;
@@ -48,40 +48,5 @@ public class Opciones {
 		return saldo - retiro;
 	}
 	
-	
-	
-	
-	
-	
-
-	static void opcion2() {
-
-		Scanner sc = new Scanner(System.in);
-		int opcion;
-		boolean salir = false;
-		do {
-			System.out.println("1) Ver saldo actual");
-			System.out.println("2) Retirar");
-
-			opcion = sc.nextInt();
-			sc.nextLine();
-
-			switch (opcion) {
-			case 1:
-				System.out.println("opcion 1 en funcion");
-				break;
-
-			case 2:
-				System.out.println("opcion 2 salir en funcion");
-				salir = true;
-				break;
-
-			default:
-				break;
-			}
-
-		} while (!salir);
-
-	}
 
 }

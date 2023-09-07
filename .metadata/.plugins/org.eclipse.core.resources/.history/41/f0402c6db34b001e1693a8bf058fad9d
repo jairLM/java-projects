@@ -1,0 +1,57 @@
+package org.myProyect;
+
+
+import java.util.ArrayList;
+import java.util.Date;
+
+public class Deposito {
+	
+	int numCuenta;
+	int monto;
+	String tipo;
+	Date fecha;
+		
+	ArrayList<Deposito> historial = new ArrayList<>();
+	
+	{
+	numCuenta = 00000;
+	monto = 0;
+	tipo = "Deposito";
+	
+	}
+	
+	Deposito(int numCuenta, int monto){
+		this.numCuenta = numCuenta;
+		this.monto = monto;
+		this.fecha = new Date();
+	}
+	Deposito(int numCuenta, int monto, String tipo){
+		this(numCuenta, monto);
+		this.tipo = tipo;
+	}
+	
+	void guardarDatos(Deposito historial1) {
+		historial.add(historial1);
+	}
+	
+	
+	String detallesDeposito2() {
+		String texto = "";
+		for (Deposito deposito : historial) {
+			texto += "\033[32mlos datos son " +  deposito.detallesDeposito();
+		}
+		
+		return texto;
+		
+	}
+	String detallesDeposito() {
+		
+		return "\033[32mMovimiento de tipo " + this.tipo + ", monto " + this.monto + " se realizo " + this.fecha + " a la cuenta " + this.numCuenta;
+		
+	}
+	
+	
+	
+	
+	
+}

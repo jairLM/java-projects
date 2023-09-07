@@ -1,0 +1,21 @@
+package org.myProyect;
+
+import java.util.Date;
+
+public class Retiro {
+	
+	private double cantidad;
+	Date fecha;
+	
+	Retiro(double cantidad){
+		this.cantidad = cantidad;
+		this.fecha = new Date();
+	}
+	
+	
+	public static  double retiro(double saldo, double retiro, double donacion) {
+		return saldo - retiro - donacion;
+	}
+	
+	
+}

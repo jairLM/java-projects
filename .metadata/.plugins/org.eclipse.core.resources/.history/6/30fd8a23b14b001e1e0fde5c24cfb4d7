@@ -1,0 +1,16 @@
+package org.myProyect;
+import java.util.ArrayList;
+public class Historial {
+
+	ArrayList<Deposito> historial = new Deposito<>();
+	
+	Historial(){
+		
+	}
+	
+	void guardarDatos() {
+		this.add(historial);
+	}
+	
+	
+}

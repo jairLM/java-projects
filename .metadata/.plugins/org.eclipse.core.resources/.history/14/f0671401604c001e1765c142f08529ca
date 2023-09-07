@@ -1,0 +1,45 @@
+package org.myProyect;
+
+
+import java.util.ArrayList;
+import java.util.Date;
+
+public class Deposito {
+	
+	int numCuenta;
+	int monto;
+	String tipo;
+	Date fecha;
+		
+	
+	
+	{
+	numCuenta = 00000;
+	monto = 0;
+	tipo = "Deposito";
+	
+	}
+	
+	
+	Deposito(int numCuenta, int monto){
+		this.numCuenta = numCuenta;
+		this.monto = monto;
+		this.fecha = new Date();
+	}
+	
+	
+
+	
+
+	String detallesDeposito() {
+		
+		return "\033[32mMovimiento de tipo " + this.tipo + ", monto " + this.monto + " se realizo " + this.fecha + " a la cuenta " + this.numCuenta;
+		
+	}
+	
+
+	
+	
+	
+	
+}

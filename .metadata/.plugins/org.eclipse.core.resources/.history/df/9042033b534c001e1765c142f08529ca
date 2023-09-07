@@ -1,0 +1,128 @@
+package org.myProyect;
+
+import java.util.Scanner;
+
+public class Opciones {
+	static Scanner sc = new Scanner(System.in);
+	static double saldo = 10_000;
+	static double donacion = 0;
+
+	static void opcion1() {
+
+		int opcion;
+		boolean salir = false;
+		do {
+			System.out.println("1) Ver saldo actual");
+			System.out.println("2) Retirar");
+			System.out.println("3) Regresar al menú principal");
+
+			opcion = sc.nextInt();
+			sc.nextLine();
+
+			switch (opcion) {
+			case 1:
+				System.out.println("Saldo actual: $" + saldo);
+				break;
+
+			case 2:
+
+				boolean salirOpcion1 = false;
+				do {
+
+					try {
+						System.out.println(
+								"\033[33mIngresa el monto a retirar (solo se aceptan cantidades mútiplos de 50)");
+						double cantidadRetiro = sc.nextInt();
+						if (cantidadRetiro > 6_000) {
+							System.out.println("\033[31mMaximo a retirar: $6000, intenta de nuevo");
+						} else {
+							System.out.println("¿Desea donar $200 para la graduación de la CH30?(1 = s / 2 = n)");
+							int respDonar = sc.nextInt();
+
+							if (respDonar == 1) {
+								donacion = 200;
+								saldo = retiro(saldo, cantidadRetiro, donacion);
+								salirOpcion1 = true;
+							} else {
+								donacion = 0;
+								saldo = retiro(saldo, cantidadRetiro, donacion);
+								salirOpcion1 = true;
+							}
+						}
+
+					} catch (Exception e) {
+						System.out.println("Ingresa datos validos");
+						sc.nextLine();
+					}
+
+				} while (!salirOpcion1);
+
+				System.out.println(saldo);
+
+				break;
+			case 3:
+				salir = true;
+				break;
+
+			default:
+				break;
+			}
+
+		} while (!salir);
+
+	}
+
+	static double retiro(double saldo, double retiro, double donacion) {
+		return saldo - retiro - donacion;
+	}
+	/*
+	 * Colores Negro: \033[30m Rojo: \033[31m Verde: \033[32m Amarillo: \033[33m
+	 * Azul: \033[34m Magenta: \033[35m Blanco: \033[37m Cyan: \033[36m Reset:
+	 * \u001B[0m
+	 */
+
+	static void opcion2() {
+	boolean opcion2 = false;
+	do {
+		
+		try {
+
+			System.out.println("1) Cuenta a cheques");
+			System.out.println("2) Deposito a tarjeta de crédito");
+			int opcion = sc.nextInt();
+			switch (opcion) {
+			case 1:
+				System.out.println("Hola");
+				break;
+			case 2:
+				System.out.println("Saldo disponible: " + saldo);
+				System.out.println("Ingrese el numero de cuenta (5 dígitos)");
+				int numCuenta = sc.nextInt();
+				System.out.println("Ingrese monto");
+				int monto = sc.nextInt();
+				Deposito deposito = new Deposito(numCuenta, monto);
+
+				deposito.guardarDatos(deposito);
+				System.out.println(deposito.detallesDeposito2());
+				System.out.println(deposito.mostrarHistorial());
+
+				break;
+			case 3:
+				opcion2 = true;
+				
+				break;
+
+			default:
+				break;
+			}
+
+		} catch (Exception e) {
+			System.out.println("Ingresa datos validos");
+			sc.nextLine();
+		}
+		
+	} while (!opcion2);
+		
+	}
+
+}

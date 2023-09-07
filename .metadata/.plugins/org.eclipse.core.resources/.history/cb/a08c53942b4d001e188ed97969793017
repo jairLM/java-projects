@@ -1,0 +1,60 @@
+package org.myProyect;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Deposito {
+	
+	private int numCuenta;
+	private int monto;
+	private String tipo;
+	Date fecha;
+		
+	
+	
+	{
+	numCuenta = 00000;
+	monto = 0;
+	tipo = "Deposito";
+	
+	}	
+	
+	Deposito(int numCuenta, int monto){
+		this.numCuenta = numCuenta;
+		this.monto = monto;
+		this.fecha = new Date();
+	}
+	
+	public int getMonto() {
+		return this.monto;
+	}
+	
+	public int getCuenta() {
+		return this.numCuenta;
+	}	
+	
+	
+	
+	public static  double deposito(double saldo, double monto) {
+		return saldo - monto;
+	}
+	public static  double depositoCheques(double saldo, double monto) {
+		return saldo + monto;
+	}
+
+	
+
+	String detallesDeposito() {	
+		SimpleDateFormat ft = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+		return "\\033[32m" + ft.format(this.fecha) +  this.tipo + " a TC DE " + this.monto ;
+		
+	}
+
+	
+	
+
+	
+	
+	
+	
+}

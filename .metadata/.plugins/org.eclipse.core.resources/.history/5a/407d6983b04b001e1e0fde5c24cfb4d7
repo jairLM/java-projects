@@ -1,0 +1,11 @@
+package org.myProyect;
+import java.util.ArrayList;
+public class Historial {
+
+	ArrayList<Deposito> historial;
+	
+	
+	
+	
+	
+}

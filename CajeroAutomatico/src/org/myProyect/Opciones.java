@@ -1,17 +1,20 @@
 package org.myProyect;
 
+import java.nio.channels.IllegalSelectorException;
 import java.util.Scanner;
 
 public class Opciones {
 	static Scanner sc = new Scanner(System.in);
+	static double saldo = 10_000;
+	static double donacion;
+	static double cantMaxima = 6_000;
+
 	static void opcion1() {
 
-		
-		double saldo = 6_000;
 		int opcion;
 		boolean salir = false;
 		do {
-			System.out.println("1) Ver saldo actual");
+			System.out.println("\033[33m1) Ver saldo actual");
 			System.out.println("2) Retirar");
 			System.out.println("3) Regresar al menú principal");
 
@@ -20,17 +23,54 @@ public class Opciones {
 
 			switch (opcion) {
 			case 1:
-				System.out.println("Saldo actual: $" + saldo);
+				System.out.println("\033[32mSaldo actual: $" + saldo);
 				break;
 
 			case 2:
-				System.out.println("Ingresa el monto a retirar (solo se aceptan cantidades mútiplos de 50)");
-				
-				double cantidadRetiro = sc.nextInt();				
-				saldo = retiro(saldo, cantidadRetiro);
-				System.out.println(saldo);				
-				
-				
+
+				boolean salirOpcion1 = false;
+				do {
+
+					try {
+						System.out.println(
+								"\033[33mIngresa el monto a retirar (solo se aceptan cantidades mútiplos de 50)");
+						double cantidadRetiro = sc.nextInt();
+						if(cantidadRetiro%50 != 0 )throw new IllegalSelectorException();
+						if (cantidadRetiro > cantMaxima) {
+							System.out.println("\033[31mMaximo a retirar: $" + cantMaxima + ", intenta de nuevo");
+						} else {
+							System.out.println("¿Desea donar $200 para la graduación de la CH30?(1 = s / 2 = n)");
+							int respDonar = sc.nextInt();
+
+							if (respDonar == 1) {
+								donacion = 200;
+								Retiro nuevoRetiro = new Retiro(cantidadRetiro);
+								Historial.añadirRetiro(nuevoRetiro);
+								saldo = Retiro.retiro(saldo, cantidadRetiro, donacion);
+								salirOpcion1 = true;
+							} else {
+								donacion = 0;
+								Retiro nuevoRetiro = new Retiro(cantidadRetiro);
+								Historial.añadirRetiro(nuevoRetiro);
+								saldo = Retiro.retiro(saldo, cantidadRetiro, donacion);
+								salirOpcion1 = true;
+							}
+						}
+
+					} 
+					catch (IllegalStateException e) {
+						System.out.println("\033[31mIngresa multiplos de 50");
+						sc.nextLine();
+					}catch (Exception e) {
+						e.printStackTrace();
+						System.out.println("\033[31mIngresa datos validos");
+						sc.nextLine();
+					}
+
+				} while (!salirOpcion1);
+
+				System.out.println(saldo);
+
 				break;
 			case 3:
 				salir = true;
@@ -43,10 +83,69 @@ public class Opciones {
 		} while (!salir);
 
 	}
+
 	
-	static double retiro(double saldo, double retiro) {
-		return saldo - retiro;
+	/*
+	 * Colores Negro: \033[30m Rojo: \033[31m Verde: \033[32m Amarillo: \033[33m
+	 * Azul: \033[34m Magenta: \033[35m Blanco: \033[37m Cyan: \033[36m Reset:
+	 * \u001B[0m
+	 */
+
+	static void opcion2() {
+	boolean opcion2 = false;
+	do {
+		
+		try {
+
+			System.out.println("\033[33m1) Cuenta a cheques");
+			System.out.println("2) Deposito a tarjeta de crédito");
+			System.out.println("3) Regresar al menú");
+			int opcion = sc.nextInt();
+			switch (opcion) {
+			
+			case 1:
+				System.out.println("Ingresa la cantidad a depositar en tu cuenta cheques: ");
+				int depositoCheque = sc.nextInt();
+				saldo = Deposito.depositoCheques(saldo, depositoCheque);
+				System.err.println("\033[32mDeposito exitoso");
+				System.out.println("Saldo: $"+ saldo);
+				break;
+				
+			case 2:
+				System.out.println("Ingrese el numero de cuenta (5 dígitos)");
+				int numCuenta = sc.nextInt();
+				System.out.println("Ingrese monto");
+				int monto = sc.nextInt();
+				
+				if(monto > saldo) throw new IllegalStateException();
+				else if(monto < 0) throw new IllegalStateException();
+				else {
+					Deposito nuevoDeposito = new Deposito(numCuenta, monto);
+					Historial.añadirDeposito(nuevoDeposito);				
+					saldo = Deposito.deposito(saldo, monto);
+				}
+				break;
+			case 3:
+				
+				opcion2 = true;
+				break;
+
+			default:
+				break;
+			}
+
+		}catch (IllegalStateException e) {
+			System.out.println("\033[31mHas excedido la cantidad disponible en tu cuenta o ingresaste valores negativos, intenta de nuevo");
+			sc.nextLine();
+		}		
+		catch (Exception e) {
+			System.out.println("\033[31mIngresa datos validos");
+			sc.nextLine();
+		}
+		 
+		
+	} while (!opcion2);
+		
 	}
-	
 
 }

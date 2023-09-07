@@ -1,0 +1,36 @@
+package org.myProyect;
+
+import java.util.Date;
+
+public class Retiro {
+	
+	private double cantidad;
+	Date fecha;
+	private String tipo;
+	
+	{
+		tipo = "retiro";
+	}
+	
+	
+	Retiro(double cantidad){
+		this.cantidad = cantidad;
+		this.fecha = new Date();
+	}
+	
+	public double getCantidad() {
+		return this.cantidad;
+	}
+	
+	
+	public static  double retiro(double saldo, double retiro, double donacion) {
+		return saldo - retiro - donacion;
+	}
+	
+	String detallesRetiro() {		
+		return "\033[32mMovimiento de tipo " + this.tipo + ", monto "
+					+ this.cantidad + " se realizo " + this.fecha;
+		
+	}
+	
+}

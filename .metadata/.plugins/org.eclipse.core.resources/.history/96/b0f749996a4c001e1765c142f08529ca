@@ -1,0 +1,34 @@
+package org.myProyect;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+
+
+public class Historial {
+	
+	
+	static ArrayList<Deposito> historialCompleto = new ArrayList<>();
+	
+	public static void añadirDeposito(Deposito deposito) {
+		
+		historialCompleto.add(deposito);	
+		
+		
+	}
+	
+	public static void mostrarDepositos() {
+		
+//		for (Deposito deposito : historialCompleto) {
+//			System.out.println(deposito.getMonto()); 
+//			System.out.println(deposito.getCuenta());  
+//		}
+		String texto = "";
+		
+		for (int i = 0; i < historialCompleto.size(); i++) {
+			texto += "Deposito" + (i+1)+ " monto " + historialCompleto.get(i).getMonto() + "\n";
+		}
+	}
+	
+	
+}

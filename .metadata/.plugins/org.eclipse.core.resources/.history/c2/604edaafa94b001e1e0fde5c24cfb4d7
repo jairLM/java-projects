@@ -1,0 +1,34 @@
+package org.myProyect;
+
+
+
+public class Deposito {
+	
+	int numCuenta;
+	int monto;
+	String tipo;
+	
+	
+	
+	
+	
+	{
+	numCuenta = 00000;
+	monto = 0;
+	tipo = "Deposito";
+	}
+	
+	Deposito(int numCuenta, int monto){
+		this.numCuenta = numCuenta;
+		this.monto = monto;
+	}
+	Deposito(int numCuenta, int monto, String tipo){
+		this(numCuenta, monto);
+		this.tipo = tipo;
+	}
+	
+	
+	
+	
+	
+}

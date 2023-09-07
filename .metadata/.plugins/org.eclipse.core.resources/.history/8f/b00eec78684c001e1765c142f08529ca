@@ -1,0 +1,27 @@
+package org.myProyect;
+
+import java.util.ArrayList;
+
+
+
+public class Historial {
+	
+	
+	static ArrayList<Deposito> historialCompleto = new ArrayList<>();
+	
+	public static void añadirDeposito(Deposito deposito) {
+		
+		historialCompleto.add(deposito);	
+		
+		
+	}
+	
+	public static void mostrarDepositos() {
+		
+		for (Deposito deposito : historialCompleto) {
+			deposito.detallesDeposito();
+		}
+	}
+	
+	
+}
